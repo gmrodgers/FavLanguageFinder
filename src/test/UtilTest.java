@@ -1,7 +1,7 @@
 package test;
 
 import main.GithubRepo;
-import main.Main;
+import main.Util;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
@@ -13,7 +13,7 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MainTest {
+public class UtilTest {
 	
 	private Map<String, Integer> totals;
 	private List<GithubRepo> repos;
@@ -33,12 +33,12 @@ public class MainTest {
 		totals.put("Java", 19);
 		totals.put("Javascript", 20);
 		totals.put("Haskell", 18);
-		assertEquals(Main.maxTotal(totals), "Javascript");
+		assertEquals(Util.maxTotal(totals), "Javascript");
 	}
 	
 	@Test
 	public void calculateLanguageTotalsTest() {
-		Map<String, Integer> newTotals = Main.calculateLanguageTotals(repos);
+		Map<String, Integer> newTotals = Util.calculateLanguageTotals(repos);
 		assertEquals((int) newTotals.get("C++"), 6271);
 		assertEquals((int) newTotals.get("Makefile"), 334);
 		assertEquals((int) newTotals.get("PureBasic"), 167);
