@@ -1,16 +1,34 @@
 package main;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.LinkedList;
 import java.util.List;
 
 public class GithubUser {
 
-	public GithubUser(String githubUser) {
-		// TODO Auto-generated constructor stub
-	}
+    private final String username;
+    private List<GithubRepo> repos;
+    private static String GITHUB_API = "https://api.github.com/users/";
 
-	public List<GithubRepo> getRepos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public GithubUser (String username) {
+        this.username = username;
+        this.repos = new LinkedList<>();
+    }
+
+    /* Give a user, get their repos */
+    public List<GithubRepo> getRepos() throws NotAGithubUserException {
+        GithubConnection connection = new GithubConnection(GITHUB_API + username + "/repos");
+        JSONArray jsonArray = new JSONArray(connection.getResponse());
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject json = jsonArray.getJSONObject(i);
+            JSONObject owner = json.getJSONObject("owner");
+            repos.add(new GithubRepo(owner.getString("login"), json.getString("name")));
+        }
+        connection.closeConnection();
+        return repos;
+    }
+
 
 }

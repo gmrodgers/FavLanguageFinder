@@ -30,13 +30,13 @@ public class GithubRepoTest {
 	}
 	
 	@Test
-	public void getNameTest() {
-		assertEquals(GITHUB_REPO, repo.getRepoName());
+	public void getReponameTest() {
+		assertEquals(GITHUB_REPO, repo.getReponame());
 	}
 	
 	@Test
-	public void getOwner() {
-		assertEquals(GITHUB_REPO, repo.getOwner());
+	public void getOwnerTest() {
+		assertEquals(GITHUB_OWNER, repo.getOwner());
 	}
 
 }
